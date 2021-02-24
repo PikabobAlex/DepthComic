@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comic Test</title>
+    <style>
+        #something {
+            background-image: url("/Assets/Img/7.png");
+            height: 200px;
+        }
+
+        .layers{
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body scroll="no" style="overflow: clip">
+    <div>
+        <div>
+            <img src="/Assets/Img/6.png" height="600px">
+        </div>
+        <div id="layer06" class="layer">
+            <div style="position: absolute; top: 300px; left: 48px;">
+                <img src="/Assets/Img/7.png" height="180px">
+            </div>
+        </div>
+        <div id="layer05" class="layer">
+            <div style="position: absolute; top: 480px;">
+                <img src="/Assets/Img/8.png" height="200px">
+            </div>
+        </div>
+        <div id="layer04" class="layer">
+            <div style="position: absolute; top: -60px; left: 700px;">
+                <img src="/Assets/Img/5.png" height="600px">
+            </div>
+        </div>
+        <div id="layer03" class="layer">
+            <div style="position: absolute; top: 340px; left: 480px;">
+                <img src="/Assets/Img/4.png" height="180px">
+            </div>
+        </div>
+        <div id="layer02" class="layer">
+            <div style="position: absolute; top: 340px; left: 60px;">
+                <img src="/Assets/Img/3.png" height="200px">
+            </div>
+        </div>
+        <div id="layer01" class="layer">
+            <div style="position: absolute; top: 300px;">
+                <img src="/Assets/Img/1.png" height="200px" style="position:absolute; top: 60px ; left: 600px">
+                <img src="/Assets/Img/2.png" height="200px" style="position:absolute; top: 60px ; left: 180px">
+            </div>
+        </div>
+
+        <!-- <div id="something"></div> -->
+    </div>
+
+
+    <pre class="output"></pre>
+    <script>
+        var ball = document.querySelector('.ball');
+        var garden = document.querySelector('.garden');
+        var output = document.querySelector('.output');
+        var img1 = document.getElementById('img1');
+
+        var layer01 = document.getElementById('layer01'),
+            layer02 = document.getElementById('layer02'),
+            layer03 = document.getElementById('layer03'),
+            layer04 = document.getElementById('layer04'),
+            layer05 = document.getElementById('layer05'),
+            layer06 = document.getElementById('layer06');
+
+        var maxX = garden.clientWidth - ball.clientWidth;
+        var maxY = garden.clientHeight - ball.clientHeight;
+
+        function handleOrientation(event) {
+            var x = event.beta; // In degree in the range [-180,180)
+            var y = event.gamma; // In degree in the range [-90,90)
+
+            // output.textContent = `beta : ${x}\n`;
+            // output.textContent += `gamma: ${y}\n`;
+
+            // Because we don't want to have the device upside down
+            // We constrain the x value to the range [-90,90]
+            if (x > 90) {
+                x = 90
+            };
+            if (x < -90) {
+                x = -90
+            };
+
+            // To make computation easier we shift the range of
+            // x and y to [0,180]
+            x += 90;
+            y += 90;
+
+            // 10 is half the size of the ball
+            // It center the positioning point to the center of the ball
+            // img1.style.top = (maxY * y / 180 - 10) + "px";
+            // img1.style.left = (maxX * x / 180 - 10) + "px";
+
+            layer01.style.top = x + "px";
+            layer01.style.left = y + "px";
+
+            layer02.style.top =    (x / 2)  + "px";
+            layer02.style.left =   (y / 2) +  "px";
+
+            layer03.style.top =    (x / 3)  + "px";
+            layer03.style.left =   (y / 3) +  "px";
+
+            layer04.style.top =    (x / 4)  + "px";
+            layer04.style.left =   (y / 4) +  "px";
+
+            layer05.style.top =    (x / 5)  + "px";
+            layer05.style.left =   (y / 5) +  "px";
+
+            layer06.style.top =    (x / 6)  + "px";
+            layer06.style.left =   (y / 6) +  "px";
+        }
+
+        window.addEventListener('deviceorientation', handleOrientation);
+    </script>
+</body>
+
+</html>
