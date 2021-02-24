@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><meta name="GCD" content="YTk3ODQ3ZWZhN2I4NzZmMzBkNTEwYjJlb1f23c6ebc8c17052ac6068b7857b0cb"/>
+<html><head><meta name="GCD" content="YTk3ODQ3ZWZhN2I4NzZmMzBkNTEwYjJl90e629f0b21ba5f55ac32c6cccf1b038"/>
   <meta charset="utf-8">
   <title>Depth Experience</title>
   <meta name="generator" content="Google Web Designer 10.0.2.0105">
@@ -119,9 +119,17 @@
           /*           pageDeck.goToPage(pageDeck.getDefaultPage().id); */
           if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             console.log("mobile detected");
-
+            
             /*      setTimeout(function (){pageDeck.goToPage('pagedeck', 'page1', 'fade', 1000, 'ease', 'top'); console.log('executing');}, 3000); */
             pageDeck.goToPage('page1');
+            if(/Android|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+            {
+              document.getElementById('intro_ios').style.display = "hidden";
+            }
+            else
+            {
+                document.getElementById('intro_android').style.display = "hidden";
+            }
           } else {
             console.log("desktop detected");
             pageDeck.goToPage('page1_2')
@@ -157,10 +165,6 @@
       if (x < -90) {
         x = -90;
       }
-
-      x += 90;
-      y += 90;
-
       layer01.style.top = x + "px";
       layer01.style.left = y + "px";
 
